@@ -1,0 +1,504 @@
+/* Paleta de Cores Consistente */
+:root {
+    --primary-color: #4A90E2; /* Azul principal */
+    --secondary-color: #F5F7FA; /* Cinza claro */
+    --accent-color: #50E3C2; /* Verde água para acentos */
+    --text-color: #333333; /* Texto principal */
+    --background-color: #ffffff; /* Fundo claro */
+    --dark-background-color: #121212; /* Fundo escuro */
+    --dark-secondary-background: #1E1E1E; /* Fundo secundário escuro */
+    --dark-text-color: #E0E0E0; /* Texto claro para modo escuro */
+    --dark-accent-color: #BB86FC; /* Acento roxo para modo escuro */
+    --dark-container-color: #2A2A2A; /* Container no modo escuro */
+    --high-contrast-background: #000000; /* Fundo de alto contraste */
+    --high-contrast-text: #ffffff; /* Texto de alto contraste */
+}
+
+/* Tipografia Refinada */
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    padding-top: 80px;
+    scroll-behavior: smooth; /* Rolagem suave */
+}
+
+/* Estilização para Scrollbars */
+body::-webkit-scrollbar {
+    width: 8px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: var(--secondary-color);
+}
+
+/* Custom Scrollbars for elements */
+.controls, .results, #output {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) var(--secondary-color);
+}
+
+.controls::-webkit-scrollbar, .results::-webkit-scrollbar, #output::-webkit-scrollbar {
+    width: 8px;
+}
+
+.controls::-webkit-scrollbar-thumb, .results::-webkit-scrollbar-thumb, #output::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+}
+
+.controls::-webkit-scrollbar-track, .results::-webkit-scrollbar-track, #output::-webkit-scrollbar-track {
+    background-color: var(--secondary-color);
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.navbar-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.navbar-buttons .bttn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    font-size: 14px;
+}
+
+/* Consistência Visual e Identidade */
+.container {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    height: 80vh;
+    padding: 20px;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .container {
+    background-color: var(--dark-container-color);
+}
+
+.controls, .results {
+    background-color: var(--background-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+body.dark-mode .controls, body.dark-mode .results {
+    background-color: var(--dark-secondary-background);
+    color: var(--dark-text-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Estilização para Inputs */
+.input-field {
+    width: 100%;
+    padding: 12px 16px; /* Aumentando o espaçamento interno para conforto */
+    margin-top: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: 1px solid #d1d1d1; /* Borda cinza suave */
+    border-radius: 8px; /* Bordas mais arredondadas */
+    font-size: 16px;
+    background-color: #ffffff; /* Fundo branco puro */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
+}
+
+/* Placeholder customizado */
+.input-field::placeholder {
+    color: #b1b1b1; /* Cor mais suave para o placeholder */
+}
+
+/* Efeito ao focar no input */
+.input-field:focus {
+    border-color: var(--primary-color); /* Muda a borda para a cor principal ao focar */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada ao focar */
+    outline: none; /* Remove o outline padrão */
+}
+
+/* Efeito hover */
+.input-field:hover {
+    border-color: var(--accent-color); /* Muda a borda para a cor de acento ao passar o mouse */
+}
+
+/* Alinhamento dos botões */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Para botões de ações pós-envio */
+.button-container.post-submit {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.button-container.post-submit .bttn {
+    width: 100%;
+    text-align: center;
+}
+
+.bttn {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    min-width: 130px;
+    text-align: center;
+}
+
+.bttn:hover {
+    background-color: var(--accent-color);
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.bttn:active {
+    background-color: var(--accent-color);
+    transform: scale(0.98);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.bttn:disabled {
+    background-color: #ccc;
+    color: #888;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Esconde etapas por padrão */
+.step {
+    display: none;
+}
+
+/* Mostra a etapa ativa */
+.step.active {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Barra de Progresso */
+#progressBar {
+    width: 100%;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+#progressBarFill {
+    height: 20px;
+    width: 0;
+    background-color: var(--accent-color);
+    transition: width 0.4s ease;
+}
+
+#progressText {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Resultados e Ajustes */
+#resultAdjustments {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.adjustment {
+    width: 48%;
+}
+
+#output {
+    display: block;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    overflow-y: auto; /* Apenas rolagem vertical */
+    overflow-x: hidden; /* Sem rolagem horizontal */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#output img {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilização do contêiner de JSON */
+.json-output {
+    text-align: left;
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre-wrap; /* Mantém as quebras de linha e espaços */
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    overflow: auto;
+    max-height: 400px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+.json-output .key {
+    color: #007acc; /* Chaves */
+}
+
+.json-output .string {
+    color: #d14; /* Strings */
+}
+
+.json-output .number {
+    color: #098; /* Números */
+}
+
+.json-output .boolean {
+    color: #f00; /* Booleanos */
+}
+
+.json-output .null {
+    color: #888; /* null */
+}
+
+.verified-icon {
+    width: 20px; /* Ajuste o tamanho conforme necessário */
+    height: 20px;
+    vertical-align: middle; /* Alinha verticalmente com o texto */
+    margin-right: 8px; /* Espaçamento entre a imagem e o texto */
+}
+
+#copyJsonButton {
+    margin-top: 10px;
+    align-self: flex-start;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    display: none;  /* Oculto por padrão */
+}
+
+#copyJsonButton.hidden {
+    display: none;
+}
+
+#copyJsonButton.show {
+    display: inline-flex;
+}
+
+/* Estilos para o balão de notificação */
+#copyNotification {
+    visibility: hidden;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #1d5a9f; /* Azul principal para maior consistência */
+    color: white;
+    padding: 12px 24px; /* Mais espaçamento para destaque */
+    border-radius: 8px; /* Bordas mais suaves */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ajuste de sombra para suavidade */
+    font-size: 14px;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 1s ease, transform 1s ease, visibility 1s ease;
+}
+
+#copyNotification.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#copyNotification.hide {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: var(--dark-background-color);
+    color: var(--dark-text-color);
+}
+
+body.dark-mode::-webkit-scrollbar-thumb {
+    background-color: var(--dark-accent-color);
+}
+
+body.dark-mode .input-field, body.dark-mode .bttn {
+    background-color: var(--dark-secondary-background);
+    color: var(--dark-text-color);
+    border: 1px solid #555;
+}
+
+body.dark-mode .bttn:hover {
+    background-color: var(--dark-accent-color);
+    color: white;
+}
+
+body.dark-mode #output img {
+    border: 2px solid #555;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+body.dark-mode .json-output {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+}
+
+body.dark-mode #progressBar {
+    background-color: #3c3c3c;
+}
+
+body.dark-mode #progressBarFill {
+    background-color: var(--dark-accent-color);
+}
+
+/* High Contrast Mode Styles */
+body.high-contrast {
+    background-color: var(--high-contrast-background);
+    color: var(--high-contrast-text);
+}
+
+body.high-contrast .controls, body.high-contrast .results {
+    background-color: var(--high-contrast-background);
+    color: var(--high-contrast-text);
+    box-shadow: 0 0 10px 2px var(--high-contrast-text);
+}
+
+body.high-contrast .input-field, body.high-contrast .bttn {
+    background-color: var(--high-contrast-background);
+    color: var(--high-contrast-text);
+    border: 1px solid var(--high-contrast-text);
+}
+
+body.high-contrast .bttn:hover {
+    background-color: #444;
+}
+
+body.high-contrast #output img {
+    border: 2px solid var(--high-contrast-text);
+    box-shadow: 0 0 10px 2px var(--high-contrast-text);
+}
+
+body.high-contrast #progressBar {
+    background-color: #222;
+}
+
+body.high-contrast #progressBarFill {
+    background-color: #fff;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+
+    .controls {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .navbar-buttons {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar-buttons .bttn {
+        margin-left: 0;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+
+    .bttn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    #resultAdjustments {
+        flex-direction: column;
+    }
+
+    .adjustment {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+}

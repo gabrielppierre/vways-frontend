@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload or URL Inference</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-brand">vwise dataset</div>
+        <div class="navbar-buttons">
+            <button class="bttn" id="toggleTheme">Dark Mode</button>
+            <button class="bttn" id="toggleContrast">High Contrast</button>
+            <button class="bttn" id="downloadDataset">Download Dataset</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Lado Esquerdo: Inputs e Configurações -->
+        <div class="controls">
+            <h2>Configure Your Image Processing</h2>
+            <div id="step1" class="step active">
+                <h3>Step 1: Choose an Image</h3>
+                <button class="bttn" id="fileMock">Upload Image</button>
+                <button class="bttn" id="urlMock">Use Image URL</button>
+                <input type="file" id="file" style="display:none;">
+                <div id="urlContainer">
+                    <input type="text" id="imageUrl" placeholder="Enter Image URL" class="input-field">
+                </div>
+                <div class="button-container">
+                    <button class="bttn next" id="nextStep1">Next</button>
+                </div>
+            </div>
+            <div id="step2" class="step">
+                <h3>Step 2: Configure Settings</h3>
+                <label for="confidence">Min Confidence (0-100%) 
+                    <span class="help-icon" title="Confidence level determines the minimum probability threshold for the model's predictions.">?</span>
+                </label>
+                <input type="number" id="confidence" placeholder="Min Confidence (0-100%)" class="input-field" value="50">
+                
+                <label for="overlap">Max Overlap (0-100%) 
+                    <span class="help-icon" title="Overlap defines the maximum allowed overlap between bounding boxes.">?</span>
+                </label>
+                <input type="number" id="overlap" placeholder="Max Overlap (0-100%)" class="input-field" value="50">
+                
+                <label for="responseFormat">Response Format:</label>
+                <select id="responseFormat" class="input-field">
+                    <option value="image">Image</option>
+                    <option value="json">JSON</option>
+                </select>
+                
+                <label for="labels">Show Labels:</label>
+                <select id="labels" class="input-field">
+                    <option value="on">On</option>
+                    <option value="off">Off</option>
+                </select>
+                
+                <label for="stroke">Bounding Box Thickness (px):</label>
+                <input type="number" id="stroke" class="input-field" value="2" min="1" max="10">
+                
+                <div class="button-container">
+                    <button class="bttn prev" id="prevStep2">Previous</button>
+                    <button class="bttn next" id="nextStep2">Next</button>
+                </div>
+            </div>
+            <div id="step3" class="step">
+                <h3>Step 3: Submit and View Results</h3>
+                <div class="button-container">
+                    <button class="bttn prev" id="prevStep3">Previous</button>
+                    <button class="bttn submit" id="submit">Submit</button>
+                </div>
+                <div id="errorMessage"></div>
+                <div id="progressContainer" class="hidden">
+                    <div id="progressBar">
+                        <div id="progressBarFill"></div>
+                    </div>
+                    <p id="progressText">Starting process...</p>
+                </div>
+                <div id="postSubmitActions" class="button-container post-submit hidden">
+                    <button class="bttn" id="submitAnother">Submit Another Image</button>
+                    <button class="bttn" id="adjustSettings">Adjust Settings</button>
+                    <button class="bttn" id="downloadResults">Download Results</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lado Direito: Resultados -->
+        <div class="results">
+            <div id="resultAdjustments" class="hidden">
+                <div class="adjustment">
+                    <label for="adjustConfidence">Adjust Confidence: <span id="confidenceValue">50%</span></label>
+                    <input type="range" id="adjustConfidence" min="0" max="100" value="50">
+                </div>
+                <div class="adjustment">
+                    <label for="adjustOverlap">Adjust Max Overlap: <span id="overlapValue">50%</span></label>
+                    <input type="range" id="adjustOverlap" min="0" max="100" value="50">
+                </div>
+            </div>
+            <!-- Apenas a parte relevante -->
+            <div id="resultContainer">
+                <div id="output"></div>
+                <button id="copyJsonButton" class="bttn hidden">Copy JSON</button>
+                <!-- Balão de Notificação -->
+                <div id="copyNotification">
+                    <img src="assets/images/sinal-de-visto.png" alt="Verificado" class="verified-icon">
+                    JSON copied to clipboard!
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>
