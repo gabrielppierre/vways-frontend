@@ -1,30 +1,34 @@
-/* Paleta de Cores Consistente */
 :root {
-    --primary-color: #4A90E2; /* Azul principal */
-    --secondary-color: #F5F7FA; /* Cinza claro */
-    --accent-color: #50E3C2; /* Verde água para acentos */
-    --text-color: #333333; /* Texto principal */
-    --background-color: #ffffff; /* Fundo claro */
-    --dark-background-color: #121212; /* Fundo escuro */
-    --dark-secondary-background: #1E1E1E; /* Fundo secundário escuro */
-    --dark-text-color: #E0E0E0; /* Texto claro para modo escuro */
-    --dark-accent-color: #BB86FC; /* Acento roxo para modo escuro */
-    --dark-container-color: #2A2A2A; /* Container no modo escuro */
-    --high-contrast-background: #000000; /* Fundo de alto contraste */
-    --high-contrast-text: #ffffff; /* Texto de alto contraste */
+    --primary-color: #4A90E2;
+    --secondary-color: #F5F7FA;
+    --accent-color: #50E3C2;
+    --text-color: #333333;
+    --background-color: #ffffff;
+    --dark-background-color: #121212;
+    --dark-secondary-background: #1E1E1E;
+    --dark-text-color: #E0E0E0;
+    --dark-accent-color: #BB86FC;
+    --dark-container-color: #2A2A2A;
+    --high-contrast-background: #000000;
+    --high-contrast-text: #ffffff;
+
+    /* Additional variables */
+    --spacing-small: 8px;
+    --spacing-medium: 16px;
+    --font-size-base: 16px;
 }
 
-/* Tipografia Refinada */
+/* Tipografia e Cor de Fundo */
 body {
     font-family: 'Inter', sans-serif;
     color: var(--text-color);
     background-color: var(--background-color);
-    font-size: 16px;
+    font-size: var(--font-size-base);
     line-height: 1.6;
     margin: 0;
     padding: 20px;
     padding-top: 80px;
-    scroll-behavior: smooth; /* Rolagem suave */
+    scroll-behavior: smooth;
 }
 
 /* Estilização para Scrollbars */
@@ -41,25 +45,6 @@ body::-webkit-scrollbar-track {
     background-color: var(--secondary-color);
 }
 
-/* Custom Scrollbars for elements */
-.controls, .results, #output {
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary-color) var(--secondary-color);
-}
-
-.controls::-webkit-scrollbar, .results::-webkit-scrollbar, #output::-webkit-scrollbar {
-    width: 8px;
-}
-
-.controls::-webkit-scrollbar-thumb, .results::-webkit-scrollbar-thumb, #output::-webkit-scrollbar-thumb {
-    background-color: var(--primary-color);
-    border-radius: 10px;
-}
-
-.controls::-webkit-scrollbar-track, .results::-webkit-scrollbar-track, #output::-webkit-scrollbar-track {
-    background-color: var(--secondary-color);
-}
-
 /* Navbar */
 .navbar {
     position: fixed;
@@ -68,7 +53,7 @@ body::-webkit-scrollbar-track {
     right: 0;
     background-color: var(--primary-color);
     color: white;
-    padding: 15px 20px;
+    padding: var(--spacing-medium);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -87,22 +72,19 @@ body::-webkit-scrollbar-track {
 }
 
 .navbar-buttons .bttn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px;
+    padding: var(--spacing-small) var(--spacing-medium);
     font-size: 14px;
 }
 
-/* Consistência Visual e Identidade */
+/* Container Principal */
 .container {
     display: grid;
     grid-template-columns: 350px 1fr;
-    gap: 20px;
+    gap: var(--spacing-medium);
     width: 100%;
     max-width: 1200px;
     height: 80vh;
-    padding: 20px;
+    padding: var(--spacing-medium);
     background-color: var(--secondary-color);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -112,9 +94,10 @@ body.dark-mode .container {
     background-color: var(--dark-container-color);
 }
 
+/* Seções de Controle e Resultados */
 .controls, .results {
     background-color: var(--background-color);
-    padding: 20px;
+    padding: var(--spacing-medium);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -128,63 +111,9 @@ body.dark-mode .controls, body.dark-mode .results {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-/* Estilização para Inputs */
-.input-field {
-    width: 100%;
-    padding: 12px 16px; /* Aumentando o espaçamento interno para conforto */
-    margin-top: 8px;
-    margin-bottom: 16px;
-    box-sizing: border-box;
-    border: 1px solid #d1d1d1; /* Borda cinza suave */
-    border-radius: 8px; /* Bordas mais arredondadas */
-    font-size: 16px;
-    background-color: #ffffff; /* Fundo branco puro */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
-}
-
-/* Placeholder customizado */
-.input-field::placeholder {
-    color: #b1b1b1; /* Cor mais suave para o placeholder */
-}
-
-/* Efeito ao focar no input */
-.input-field:focus {
-    border-color: var(--primary-color); /* Muda a borda para a cor principal ao focar */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada ao focar */
-    outline: none; /* Remove o outline padrão */
-}
-
-/* Efeito hover */
-.input-field:hover {
-    border-color: var(--accent-color); /* Muda a borda para a cor de acento ao passar o mouse */
-}
-
-/* Alinhamento dos botões */
-.button-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-/* Para botões de ações pós-envio */
-.button-container.post-submit {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-    margin-top: 30px;
-    width: 100%;
-}
-
-.button-container.post-submit .bttn {
-    width: 100%;
-    text-align: center;
-}
-
+/* Botões */
 .bttn {
-    padding: 10px 20px;
+    padding: var(--spacing-small) var(--spacing-medium);
     background-color: var(--primary-color);
     color: white;
     border: none;
@@ -215,6 +144,84 @@ body.dark-mode .controls, body.dark-mode .results {
     box-shadow: none;
 }
 
+/* Flex container for buttons */
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-small);
+}
+
+#buttonContainer .bttn {
+    flex: 1;
+    margin-right: var(--spacing-small);
+}
+
+#buttonContainer .bttn:last-child {
+    margin-right: 0;
+}
+
+/* Inputs */
+.input-field {
+    width: 100%;
+    padding: var(--spacing-small) var(--spacing-medium);
+    margin-top: var(--spacing-small);
+    margin-bottom: var(--spacing-medium);
+    box-sizing: border-box;
+    border: 1px solid #d1d1d1;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-field::placeholder {
+    color: #b1b1b1;
+}
+
+.input-field:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    outline: none;
+}
+
+.input-field:hover {
+    border-color: var(--accent-color);
+}
+
+/* Alinhamento dos botões */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px; /* Espaço menor entre os botões */
+    margin-top: var(--spacing-medium);
+}
+
+.button-container .bttn {
+    flex: 1; /* Cada botão ocupa a mesma proporção */
+    text-align: center;
+    padding: var(--spacing-small) var(--spacing-medium);
+}
+
+.button-container .bttn:not(:last-child) {
+    margin-right: 10px; /* Espaço entre botões */
+}
+
+/* Para botões de ações pós-envio */
+.button-container.post-submit {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-small);
+    margin-top: var(--spacing-medium);
+    width: 100%;
+}
+
+.button-container.post-submit .bttn {
+    width: 100%;
+    text-align: center;
+}
+
 /* Esconde etapas por padrão */
 .step {
     display: none;
@@ -235,7 +242,7 @@ body.dark-mode .controls, body.dark-mode .results {
     background-color: #f3f3f3;
     border-radius: 5px;
     overflow: hidden;
-    margin-top: 10px;
+    margin-top: var(--spacing-small);
 }
 
 #progressBarFill {
@@ -246,7 +253,7 @@ body.dark-mode .controls, body.dark-mode .results {
 }
 
 #progressText {
-    margin-top: 10px;
+    margin-top: var(--spacing-small);
     font-size: 14px;
     color: #666;
 }
@@ -255,7 +262,7 @@ body.dark-mode .controls, body.dark-mode .results {
 #resultAdjustments {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: var(--spacing-medium);
 }
 
 .adjustment {
@@ -266,15 +273,14 @@ body.dark-mode .controls, body.dark-mode .results {
     display: block;
     justify-content: flex-start;
     align-items: flex-start;
-    width: 100% -2%;
-    height: 100%;
+    width: 100%;
     min-height: 25vw;
     text-align: left;
-    padding: 10px;
+    padding: var(--spacing-small);
     background-color: #f5f5f5;
     border-radius: 8px;
-    overflow-y: auto; /* Apenas rolagem vertical */
-    overflow-x: hidden; /* Sem rolagem horizontal */
+    overflow-y: auto;
+    overflow-x: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -290,7 +296,7 @@ body.dark-mode .controls, body.dark-mode .results {
 .json-output {
     text-align: left;
     font-family: 'Courier New', Courier, monospace;
-    white-space: pre-wrap; /* Mantém as quebras de linha e espaços */
+    white-space: pre-wrap;
     background-color: #f5f5f5;
     padding: 15px;
     border-radius: 8px;
@@ -299,50 +305,47 @@ body.dark-mode .controls, body.dark-mode .results {
     margin-bottom: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     line-height: 1.5;
-    font-size: 16px;
+    font-size: var(--font-size-base);
 }
 
 .json-output .key {
-    color: #007acc; /* Chaves */
+    color: #007acc;
 }
 
 .json-output .string {
-    color: #d14; /* Strings */
+    color: #d14;
 }
 
 .json-output .number {
-    color: #098; /* Números */
+    color: #098;
 }
 
 .json-output .boolean {
-    color: #f00; /* Booleanos */
+    color: #f00;
 }
 
 .json-output .null {
-    color: #888; /* null */
+    color: #888;
 }
 
+/* Notificação de Cópia */
 .verified-icon {
-    width: 20px; /* Ajuste o tamanho conforme necessário */
+    width: 20px;
     height: 20px;
-    vertical-align: middle; /* Alinha verticalmente com o texto */
-    margin-right: 8px; /* Espaçamento entre a imagem e o texto */
+    vertical-align: middle;
+    margin-right: var(--spacing-small);
 }
 
 #copyJsonButton {
-    margin-top: 10px;
+    margin-top: var(--spacing-small);
     align-self: flex-start;
     background-color: var(--accent-color);
     color: white;
-    padding: 8px 16px;
+    padding: var(--spacing-small) var(--spacing-medium);
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
     font-weight: 500;
-    display: none;  /* Oculto por padrão */
-}
-
-#copyJsonButton.hidden {
     display: none;
 }
 
@@ -356,11 +359,11 @@ body.dark-mode .controls, body.dark-mode .results {
     position: fixed;
     top: 20px;
     right: 20px;
-    background-color: #1d5a9f; /* Azul principal para maior consistência */
+    background-color: #1d5a9f;
     color: white;
-    padding: 12px 24px; /* Mais espaçamento para destaque */
-    border-radius: 8px; /* Bordas mais suaves */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ajuste de sombra para suavidade */
+    padding: var(--spacing-small) var(--spacing-medium);
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     font-size: 14px;
     z-index: 1000;
     opacity: 0;
@@ -372,12 +375,6 @@ body.dark-mode .controls, body.dark-mode .results {
     visibility: visible;
     opacity: 1;
     transform: translateY(0);
-}
-
-#copyNotification.hide {
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(-20px);
 }
 
 /* Dark Mode Styles */
@@ -458,12 +455,12 @@ body.high-contrast #progressBarFill {
 @media (max-width: 768px) {
     .container {
         grid-template-columns: 1fr;
-        padding: 10px;
+        padding: var(--spacing-small);
     }
 
     .controls {
         width: 100%;
-        margin-bottom: 20px;
+        margin-bottom: var(--spacing-medium);
     }
 
     .navbar-buttons {
@@ -473,12 +470,12 @@ body.high-contrast #progressBarFill {
 
     .navbar-buttons .bttn {
         margin-left: 0;
-        margin-bottom: 10px;
+        margin-bottom: var(--spacing-small);
         width: 100%;
     }
 
     .bttn {
-        padding: 10px 20px;
+        padding: var(--spacing-small) var(--spacing-medium);
         font-size: 14px;
     }
 
@@ -500,6 +497,20 @@ body.high-contrast #progressBarFill {
 
     .adjustment {
         width: 100%;
-        margin-bottom: 15px;
+        margin-bottom: var(--spacing-small);
+    }
+
+    .flex-container {
+        flex-direction: column;
+    }
+
+    #buttonContainer .bttn {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: var(--spacing-small);
+    }
+
+    #urlContainer .input-field {
+        width: 100%;
     }
 }

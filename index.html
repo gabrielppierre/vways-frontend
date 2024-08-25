@@ -9,24 +9,25 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
+    <header class="navbar">
         <div class="navbar-brand">vwise dataset</div>
-        <div class="navbar-buttons">
+        <nav class="navbar-buttons">
             <button class="bttn" id="toggleTheme">Dark Mode</button>
             <button class="bttn" id="toggleContrast">High Contrast</button>
             <button class="bttn" id="downloadDataset">Download Dataset</button>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
-    <div class="container">
+    <main class="container">
         <!-- Lado Esquerdo: Inputs e Configurações -->
-        <div class="controls">
+        <section class="controls">
             <h2>Configure Your Image Processing</h2>
             <div id="step1" class="step active">
                 <h3>Step 1: Choose an Image</h3>
-                <button class="bttn" id="fileMock">Upload Image</button>
-                <button class="bttn" id="urlMock">Use Image URL</button>
+                <div id="buttonContainer" class="flex-container">
+                    <button class="bttn" id="fileMock">Upload Image</button>
+                    <button class="bttn" id="urlMock">Use Image URL</button>
+                </div>
                 <input type="file" id="file" style="display:none;">
                 <div id="urlContainer">
                     <input type="text" id="imageUrl" placeholder="Enter Image URL" class="input-field">
@@ -35,6 +36,7 @@
                     <button class="bttn next" id="nextStep1">Next</button>
                 </div>
             </div>
+
             <div id="step2" class="step">
                 <h3>Step 2: Configure Settings</h3>
                 <label for="confidence">Min Confidence (0-100%) 
@@ -67,6 +69,7 @@
                     <button class="bttn next" id="nextStep2">Next</button>
                 </div>
             </div>
+
             <div id="step3" class="step">
                 <h3>Step 3: Submit and View Results</h3>
                 <div class="button-container">
@@ -86,10 +89,10 @@
                     <button class="bttn" id="downloadResults">Download Results</button>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Lado Direito: Resultados -->
-        <div class="results">
+        <section class="results">
             <div id="resultAdjustments" class="hidden">
                 <div class="adjustment">
                     <label for="adjustConfidence">Adjust Confidence: <span id="confidenceValue">50%</span></label>
@@ -100,18 +103,16 @@
                     <input type="range" id="adjustOverlap" min="0" max="100" value="50">
                 </div>
             </div>
-            <!-- Apenas a parte relevante -->
+
             <div id="resultContainer">
                 <div id="output"></div>
                 <button id="copyJsonButton" class="bttn hidden">Copy JSON</button>
-                <!-- Balão de Notificação -->
                 <div id="copyNotification">
                     <img src="assets/images/sinal-de-visto.png" alt="Verificado" class="verified-icon">
                     JSON copied to clipboard!
                 </div>
-                
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 </body>
 </html>
