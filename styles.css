@@ -9,8 +9,6 @@
     --dark-text-color: #E0E0E0;
     --dark-accent-color: #BB86FC;
     --dark-container-color: #2A2A2A;
-    --high-contrast-background: #000000;
-    --high-contrast-text: #ffffff;
 
     /* Additional variables */
     --spacing-small: 8px;
@@ -417,41 +415,6 @@ body.dark-mode #progressBar {
 
 body.dark-mode #progressBarFill {
     background-color: var(--dark-accent-color);
-}
-
-/* High Contrast Mode Styles */
-body.high-contrast {
-    background-color: var(--high-contrast-background);
-    color: var(--high-contrast-text);
-}
-
-body.high-contrast .controls, body.high-contrast .results {
-    background-color: var(--high-contrast-background);
-    color: var(--high-contrast-text);
-    box-shadow: 0 0 10px 2px var(--high-contrast-text);
-}
-
-body.high-contrast .input-field, body.high-contrast .bttn {
-    background-color: var(--high-contrast-background);
-    color: var(--high-contrast-text);
-    border: 1px solid var(--high-contrast-text);
-}
-
-body.high-contrast .bttn:hover {
-    background-color: #444;
-}
-
-body.high-contrast #output img {
-    border: 2px solid var(--high-contrast-text);
-    box-shadow: 0 0 10px 2px var(--high-contrast-text);
-}
-
-body.high-contrast #progressBar {
-    background-color: #222;
-}
-
-body.high-contrast #progressBarFill {
-    background-color: #fff;
 }
 
 /* Responsividade */

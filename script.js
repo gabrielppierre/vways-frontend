@@ -19,7 +19,6 @@ $(document).ready(function() {
         $('#imageUrl').on('input', toggleNextButton);
 
         $('#toggleTheme').click(toggleTheme);
-        $('#toggleContrast').click(toggleContrast);
 
         $('#responseFormat').change(handleResponseFormatChange);
 
@@ -119,11 +118,7 @@ $(document).ready(function() {
     }
 
     function toggleTheme() {
-        $('body').toggleClass('dark-mode').removeClass('high-contrast');
-    }
-
-    function toggleContrast() {
-        $('body').toggleClass('high-contrast').removeClass('dark-mode');
+        $('body').toggleClass('dark-mode');
     }
 
     function infer() {
@@ -314,7 +309,7 @@ $(document).ready(function() {
 
         setTimeout(() => {
             notification.removeClass('show').addClass('hide');
-        }, 3000); // Exibe por 2 segundos
+        }, 3000); // Exibe por 3 segundos
     }
 
     function showError(message) {
