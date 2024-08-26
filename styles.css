@@ -119,7 +119,6 @@ body.dark-mode .controls, body.dark-mode .results {
     cursor: pointer;
     font-weight: 500;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    min-width: 130px;
     text-align: center;
 }
 
@@ -330,7 +329,7 @@ body.dark-mode .controls, body.dark-mode .results {
 }
 
 /* Notificação de Cópia */
-.verified-icon {
+.verified-icon, .icon {
     width: 20px;
     height: 20px;
     vertical-align: middle;

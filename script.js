@@ -93,7 +93,7 @@ $(document).ready(function() {
 
     function handleResponseFormatChange() {
         $('#copyJsonButton').addClass('hidden').hide(); // Esconde o botão ao mudar o formato
-    }    
+    }
 
     function resetFormAndGoToStep1() {
         resetForm();
@@ -164,22 +164,34 @@ $(document).ready(function() {
     }
 
     function getRequestSettings(base64image, url) {
+        const taskType = $('#taskType').val();
         const responseFormat = $('#responseFormat').val();
+        const apiBaseUrl = taskType === "detection" 
+            ? "https://detect.roboflow.com/vways-detec/2" 
+            : "https://classify.roboflow.com/vways-ic/2";
+
+        // Força o formato JSON para a tarefa de classificação, independentemente do que o usuário escolher
+        const finalFormat = taskType === "classification" ? "json" : responseFormat;
+
         const settings = {
             method: "POST",
-            url: buildRequestUrl(responseFormat, url),
+            url: buildRequestUrl(apiBaseUrl, finalFormat, url),
             data: base64image || null,
-            xhr: responseFormat === "image" ? createXhrForImage : undefined
+            xhr: finalFormat === "image" ? createXhrForImage : undefined
         };
         return settings;
     }
 
-    function buildRequestUrl(responseFormat, url) {
-        let requestUrl = `https://detect.roboflow.com/vways-detec/2?api_key=Mo619V8ueyJuR68Ua7Ud&format=${responseFormat}`;
+    function buildRequestUrl(baseUrl, responseFormat, url) {
+        let requestUrl = `${baseUrl}?api_key=Mo619V8ueyJuR68Ua7Ud&format=${responseFormat}`;
         requestUrl += `&confidence=${encodeURIComponent($('#confidence').val())}`;
-        requestUrl += `&overlap=${encodeURIComponent($('#overlap').val())}`;
-        requestUrl += `&labels=${encodeURIComponent($('#labels').val())}`;
-        requestUrl += `&stroke=${encodeURIComponent($('#stroke').val())}`;
+        
+        if (baseUrl.includes("detect")) {
+            requestUrl += `&overlap=${encodeURIComponent($('#overlap').val())}`;
+            requestUrl += `&labels=${encodeURIComponent($('#labels').val())}`;
+            requestUrl += `&stroke=${encodeURIComponent($('#stroke').val())}`;
+        }
+
         if (url) {
             requestUrl += `&image=${encodeURIComponent(url)}`;
         }
@@ -194,30 +206,64 @@ $(document).ready(function() {
 
     function handleResponse(response) {
         updateProgress(80, "Processing response...");
-        displayResponse(response);
+
+        const taskType = $('#taskType').val();
+        const responseFormat = $('#responseFormat').val();
+
+        if (taskType === "classification") {
+            if (responseFormat === "json") {
+                displayJsonResponse(response); // Exibe a resposta em JSON
+            } else {
+                displayClassificationResponse(response); // Exibe a imagem original e a classificação
+            }
+        } else if (taskType === "detection") {
+            if (responseFormat === "json") {
+                displayJsonResponse(response); // Exibe a resposta JSON da detecção
+            } else {
+                displayImageResponse(response); // Exibe a imagem processada com as detecções
+            }
+        } else {
+            showError("Unknown task type.");
+        }
+
         updateProgress(100, "Process complete.");
         $('#postSubmitActions').removeClass('hidden');
     
-        // Exibe o botão de copiar JSON somente após o envio e se o formato for JSON
-        const responseFormat = $('#responseFormat').val();
         if (responseFormat === "json") {
             $('#copyJsonButton').removeClass('hidden').show();
         }
-    }    
+    }
 
-    function displayResponse(response) {
-        const responseFormat = $('#responseFormat').val();
-        $('#output').html('');
-        $('#copyJsonButton').addClass('hidden').hide();
+    function displayClassificationResponse(response) {
+        // Verifica se a chave "predicted_classes" existe e se contém ao menos um valor
+        const predictedClass = response.predicted_classes && response.predicted_classes.length > 0 
+            ? response.predicted_classes[0] 
+            : 'Unknown';
 
-        if (responseFormat === "json") {
-            const formattedJson = syntaxHighlight(response);
-            $('#output').addClass('json-output').append('<pre>' + formattedJson + '</pre>');
-            $('#downloadResults').data('content', JSON.stringify(response, null, 4)).data('type', 'json');
-            $('#copyJsonButton').removeClass('hidden').show();
-        } else {
-            displayImageResponse(response);
+        // Mostrar a imagem original
+        let imgSrc;
+        const file = $('#file').get(0).files[0];
+        const url = $('#imageUrl').val();
+
+        if (file) {
+            imgSrc = URL.createObjectURL(file);
+        } else if (url) {
+            imgSrc = url;
         }
+
+        const img = $('<img/>').attr('src', imgSrc).on('load', () => $('html').scrollTop(100000));
+        $('#output').html(img); // Exibir a imagem original
+
+        // Exibir a classe prevista abaixo da imagem
+        const resultText = `<p>Predicted Class: <strong>${predictedClass}</strong></p>`;
+        $('#output').append(resultText);
+    }
+
+    function displayJsonResponse(response) {
+        // Exibe a resposta JSON formatada
+        const formattedJson = syntaxHighlight(response);
+        $('#output').addClass('json-output').html('<pre>' + formattedJson + '</pre>'); // Substitui o conteúdo existente por JSON formatado
+        $('#downloadResults').data('content', JSON.stringify(response, null, 4)).data('type', 'json');
     }
 
     function displayImageResponse(response) {
@@ -225,7 +271,7 @@ $(document).ready(function() {
         const imageUrl = URL.createObjectURL(blob);
 
         const img = $('<img/>').attr('src', imageUrl).on('load', () => $('html').scrollTop(100000));
-        $('#output').append(img);
+        $('#output').html(img); // Limpa qualquer conteúdo anterior e exibe a imagem processada
         $('#downloadResults').data('content', blob).data('type', 'png');
     }
 
@@ -315,5 +361,4 @@ $(document).ready(function() {
     function showError(message) {
         $('#errorMessage').text(message).show();
     }
-    
 });

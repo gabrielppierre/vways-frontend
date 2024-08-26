@@ -14,7 +14,7 @@
         <div class="navbar-brand">vwise dataset</div>
         <nav class="navbar-buttons">
             <button class="bttn" id="downloadDataset">Download Dataset</button>
-            <button class="bttn" id="toggleTheme">Dark Mode</button>
+            <button class="bttn" id="toggleTheme"><i class="fas fa-lightbulb"></i></button>
         </nav>
     </header>
 
@@ -39,6 +39,13 @@
 
             <div id="step2" class="step">
                 <h3>Step 2: Configure Settings</h3>
+
+                <label for="taskType">Task Type:</label>
+                <select id="taskType" class="input-field">
+                    <option value="detection">Detection</option>
+                    <option value="classification">Classification</option>
+                </select>
+
                 <label for="confidence">Min Confidence (0-100%) 
                     <span class="help-icon" title="Confidence level determines the minimum probability threshold for the model's predictions.">?</span>
                 </label>
@@ -48,7 +55,7 @@
                     <span class="help-icon" title="Overlap defines the maximum allowed overlap between bounding boxes.">?</span>
                 </label>
                 <input type="number" id="overlap" placeholder="Max Overlap (0-100%)" class="input-field" value="50">
-                
+
                 <label for="responseFormat">Response Format:</label>
                 <select id="responseFormat" class="input-field">
                     <option value="image">Image</option>
